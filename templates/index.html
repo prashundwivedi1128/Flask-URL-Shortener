@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bhai Ka URL Shortener 🚀</title>
+    <style>
+        /* Thodi styling taaki project "Pro" lage */
+        body { font-family: 'Poppins', sans-serif; background: #f0f2f5; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); text-align: center; width: 400px; }
+        h1 { color: #333; margin-bottom: 20px; }
+        input { width: 90%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; margin-bottom: 15px; outline: none; }
+        input:focus { border-color: #007bff; }
+        button { width: 100%; padding: 12px; background: #007bff; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: bold; }
+        button:hover { background: #0056b3; }
+        #result { margin-top: 20px; padding: 10px; border-radius: 5px; background: #e9f7ef; display: none; word-break: break-all; }
+        a { color: #28a745; text-decoration: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>🚀 URL Shortener</h1>
+        <input type="text" id="longUrl" placeholder="Paste your long link here...">
+        <button onclick="shortenURL()">Shorten It!</button>
+
+        <div id="result">
+            <p>Bhai, teri choti link ye rahi:</p>
+            <a href="#" id="shortLink" target="_blank"></a>
+        </div>
+    </div>
+
+    <script>
+        async function shortenURL() {
+            const urlInput = document.getElementById('longUrl').value;
+            const resultDiv = document.getElementById('result');
+            const shortLinkA = document.getElementById('shortLink');
+
+            if (!urlInput) {
+                alert("Bhai, pehle link toh daal!");
+                return;
+            }
+
+            // Ye Fetch API tere Python server ke '/shorten' route se baat karegi
+            const response = await fetch('/shorten', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ url: urlInput })
+            });
+
+            const data = await response.json();
+
+            if (data.shortUrl) {
+                resultDiv.style.display = 'block';
+                shortLinkA.href = data.shortUrl;
+                shortLinkA.innerText = data.shortUrl;
+            } else {
+                alert("Kuch gadbad ho gayi!");
+            }
+        }
+    </script>
+</body>
+</html>
