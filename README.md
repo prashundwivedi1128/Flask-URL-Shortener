@@ -2,6 +2,15 @@
 
 A sleek and functional web application built to convert long, messy URLs into clean, short links. This project demonstrates full-stack development skills, focusing on backend logic and database management.
 
+
+
+This is a full-stack URL Shortener project built as part of the backend development challenges from Roadmap.sh.
+
+### Project Link
+You can find the project details here: [https://roadmap.sh/projects/url-shortener](https://roadmap.sh/projects/url-shortener) 
+
+
+
 ### 🛠️ Tech Stack
 * **Backend:** Python (Flask Framework)
 * **Database:** SQLite3 (For persistent data storage)
